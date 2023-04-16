@@ -1,5 +1,7 @@
 #include <cmath>
+#include <iostream>
 #include <vector>
+#include <algorithm>
 #include <SDL2/SDL.h>
 
 #define WINDOW_WIDTH 600

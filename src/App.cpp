@@ -33,8 +33,13 @@ vec3d rotateVert(vec3d* vert, vec3d* angle, vec3d* rotation_point)
     return old_vert;
 }
 
+bool compare_by_z(const vec3d& a, const vec3d& b) {
+    return a.z < b.z;
+}
+
 App::App()
 {
+	std::cout << "Making Bulb..." << std::endl;
     for (float i = 0; i < DIM; i++) {
 		for (float j = 0; j < DIM; j++) {
 
@@ -84,7 +89,10 @@ App::App()
 				}
 			}
 		}
+		if ((static_cast<int>(i)+1)%100 == 0)
+			std::cout << i+1 << "/" << DIM << std::endl;
 	}
+	std::cout << "Done!" << std::endl;
 }
 
 void App::update()
@@ -108,6 +116,7 @@ void App::update()
 		points[i].y = map_range(transformed.y, -1, 1, -WINDOW_HEIGHT*0.5, WINDOW_HEIGHT*0.5);
 		points[i].z = map_range(transformed.z, -1, 1, 0.3, 0.6);
 	}
+	std::sort(points.begin(), points.end(), compare_by_z);
 }
 
 void App::draw()
